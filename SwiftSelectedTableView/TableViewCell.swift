@@ -17,13 +17,12 @@ class TableViewCell: UITableViewCell {
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
     
-    @IBOutlet weak var label1: UILabel!
-    
     var delegate: TableViewDelegate?
     
     func ChoiceConfigure(indexPath:Int, selectedChoice:[Int:Int]) {
         button1.tag = indexPath
         button2.tag = indexPath
+        
         if let choice = selectedChoice[indexPath] {
             if choice == 1 {
                 button1.backgroundColor = UIColor.blue

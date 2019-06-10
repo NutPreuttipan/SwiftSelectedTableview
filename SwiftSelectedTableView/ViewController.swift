@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableviewList: UITableView!
     
     var SelectedChoice:[Int:Int] = [:]
+    var SelectedCheckBox:[Int:[Int]] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,15 +43,23 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
             cell.delegate = self
             return cell
         } else {
-            let cell = self.tableviewList.dequeueReusableCell(withIdentifier: "cellLabel", for: indexPath)
+            let cell = self.tableviewList.dequeueReusableCell(withIdentifier: "cellCheckBox", for: indexPath) as! ChechBoxTableViewCell
+            cell.checkBoxConfigure(indexPath: indexPath.row, selectedCheckBox: SelectedCheckBox)
+            cell.delegate = self
             return cell
         }
     }
 }
 
-extension ViewController: TableViewDelegate {
+extension ViewController: TableViewDelegate, ChechBoxTableViewCellDelegate {
+    
     func didSelectedChoice(indexPath: Int, choice: Int) {
         SelectedChoice[indexPath] = choice
+    }
+    
+    func didSelectCheckBox(indexPath: Int, choice: [Int]) {
+        SelectedCheckBox[indexPath] = choice
+        print(SelectedCheckBox)
     }
 }
 
